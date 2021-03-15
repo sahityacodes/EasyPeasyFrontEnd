@@ -1,0 +1,38 @@
+#btmFooter {
+    align-self: flex-end;
+  }
+  footer {
+    font-family:Roboto, "Helvetica Neue", sans-serif;
+    color: white;
+    background-color:black;
+    bottom: 0px;
+    font-size: medium;
+    padding-left: 5%;
+    padding-top: 2%;
+    margin-top: 2%;
+  }
+  li{
+    list-style: none;
+    padding-top: 10px;
+  }
+  a{
+    text-decoration: none;
+    color: white;
+  }
+  
+  a:hover,a:active{
+    color: #d2d2d2;
+  }
+
+<footer class="md-padding" fxLayout="row"  fxLayoutAlign="start start">
+    <ul fxFlex fxLayout fxLayoutGap="10px"   fxHide.xs>
+      <li> <a routerLink="/">  <img src="/assets/image/logo.jpg" alt="Logo" width="100px" height="100px"></a></li>
+      <li>
+        <ol>
+          <li><a routerLink="/">HOME</a></li>
+          <li>HELP DESK</li>
+          <li><a routerLink="/sell_item">SELL ITEM</a></li>
+        </ol>
+      </li>
+    </ul>
+  </footer>
