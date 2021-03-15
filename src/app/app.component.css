@@ -1,0 +1,6 @@
+mat-drawer{
+  width: 250px;
+}
+mat-drawer,mat-drawer-container,mat-drawer-content{
+  height: 100%;
+}

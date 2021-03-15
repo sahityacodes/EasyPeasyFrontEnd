@@ -1,0 +1,17 @@
+<script src="path/to/angular.js"></script>
+<script src="path/to/angular-cookies.js"></script>
+<mat-drawer-container>
+  <mat-drawer #drawer role="navigation">
+    <app-sidenav-list (drawerCloser)="drawer.close()"></app-sidenav-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-header (drawerOnToggle)="drawer.toggle()"></app-header>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+    <app-footer></app-footer>
+  </mat-drawer-content>
+</mat-drawer-container>
+<app-spinner></app-spinner>
+
+
