@@ -1,0 +1,23 @@
+.pass-btn-hide-class {
+  position: absolute;
+  right: 4px;
+}
+.row{
+  background: white;
+
+}
+a{
+color: #688B9A;
+}
+
+ button{
+   background-color: #688B9A;
+   color: white;
+ }
+mat-form-field {
+
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  /*align-items: center;*/
+}

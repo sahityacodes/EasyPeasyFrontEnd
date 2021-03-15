@@ -1,0 +1,110 @@
+<div class="sell_item">
+  <div class="container mt-5 p-4" style="background:white">
+
+         <form #f='ngForm' (ngSubmit)="onSubmit(f)">
+          <div class="row justify-content-center" >
+                <div class="col-xl-5 col-sm-12 ">
+              <h5>Item Information:</h5>
+              <div [innerHtml]='msgEr' *ngIf="msgEr" style="color: #ff0000;"></div>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Item Name" name="name" ngModel required>
+              </mat-form-field> <br>
+
+              <mat-form-field class="example-full-width" >
+                <mat-label>Item Description</mat-label>
+                <textarea  class="md-textarea md-textarea-auto form-control"  matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkTextareaAutosize
+                  label="Item Description" placeholder="Insert the description of the item here" cdkAutosizeMinRows="5"
+                  name="description" ngModel required></textarea>
+              </mat-form-field><br>
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Available till</mat-label>
+
+                <input   matInput required [matDatepicker]="picker" placeholder="mm/dd/yyyy" name="deliver_date"
+                  [(ngModel)]="delivery_time" required>
+                <mat-datepicker-toggle matSuffix [for]="picker">
+                  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+
+                </mat-datepicker-toggle>
+
+                <mat-datepicker #picker></mat-datepicker>
+
+              </mat-form-field>   <mat-icon class='colorInfo' matTooltip="Format dd/mm/yyyy">info_outline</mat-icon><br>
+
+              <mat-form-field class="example-full-width">
+                <input matInput type="number" placeholder="price" name="price" ngModel required [(ngModel)]="price">
+                <span matSuffix>Peas</span>
+                <div [innerHtml]='price_msg' *ngIf="price_msg" style="color: #ff0000;"></div>
+              </mat-form-field>
+              <p class="small" color="orange">Notice: if the item is a service, the price is intended as price per hours
+              </p>
+
+
+            </div>
+            <!-- info  -->
+            <div class="col-xl-3  col-sm-12">
+              <h5> Contact Information:</h5>
+              <mat-form-field>
+                <input matInput type="number" placeholder="Phone Number" name="number" ngModel required
+                  [(ngModel)]="number">
+                <div [innerHtml]='number_msg' *ngIf="number_msg" style="color: #ff0000;"></div>
+              </mat-form-field>
+
+
+
+              <p>Address: <mat-icon matSuffix>location_on</mat-icon>
+              </p>
+              <mat-form-field>
+                <input matInput placeholder="country" name="country" ngModel required [maxLength]="50">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="City" name="city" ngModel required>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input matInput placeholder="street" name="street" ngModel required>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input matInput type="zip" placeholder="zip" name="zip" ngModel maxlength="5" required
+                  [(ngModel)]="zip">
+                <div [innerHtml]='zip_msg' *ngIf="zip_msg" style="color: #ff0000;"></div>
+
+              </mat-form-field>
+
+
+            </div>
+            <!-- more  -->
+            <div class="col-xl-4  col-sm-12 mt-5 ">
+
+              <mat-checkbox ngForm input type="checkbox" name="is_service" [(ngModel)]="isService">
+                This item is a service
+              </mat-checkbox>
+              <mat-icon class='colorInfo' matTooltip="Select to see your item on Service section">info_outline</mat-icon>
+
+              <mat-checkbox ngForm input type="checkbox" name="showContact" [(ngModel)]="showContact">
+                Show my contact information
+              </mat-checkbox>
+              <mat-icon class='colorInfo' matTooltip="Your contact information will appear to all users">info_outline</mat-icon>
+              <div>
+                <label><b>Upload image of the item:</b></label>
+                <div [innerHtml]='image_msg' *ngIf="image_msg" style="color: #ff0000;"></div>
+                <div><img [src]="url" height="200" width="200" *ngIf="url"></div>
+                <p>
+                  <input type="file" (change)="uploadImage($event)">
+                </p>
+              </div>
+
+
+                <button class="bottom" mat-raised-button class="big samll-text" type="submit" >Sell!</button>
+
+            </div>
+
+
+
+          </div>
+        </form>
+
+
+  </div>
+</div>

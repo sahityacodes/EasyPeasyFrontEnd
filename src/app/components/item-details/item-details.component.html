@@ -1,0 +1,46 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+
+<div class="container" *ngIf="item">
+	<div class="card">
+		<div class="container-fliud">
+			<div class="wrapper row">
+				<div class="preview col-md-6">
+					<div class="potrait">
+						<img src={{item.image}} alt="Image not found">
+					</div>
+				</div>
+				<div class="details col-md-6">
+					<div>
+						   <h4 class="item-title float-left"  >{{item.name}}</h4>
+						   <a class="float-right"><span class="heart"></span></a>
+
+						</div>
+						<p class="price">{{item.price}} peas</p>
+						<p class="description">{{item.description}}</p>
+                       <div class="line" ></div>
+					<!-- End line -->
+					<h5>Location Details</h5>
+					<span class="description">Location : {{item.street}}, {{item.zip}}, {{item.city}}, {{item.country}}</span>
+					<span *ngIf ="item.real_delivery_time" class="description">Availability : Till {{item.real_delivery_time | date }}</span>
+
+					<h5>Contact Me</h5>
+					<span class="description">Email : {{item.seller.email}}</span>
+					<span class="description">Contact No : {{item.seller.mobile}}</span>
+
+					<br />
+
+
+					<div class="action">
+						<button   [routerLink]="['/checkout', item._id]" mat-flat-button  class="buy-now btn btn-default" type="button">Buy Now</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container" *ngIf="errorMsg">
+	<div class="card">
+		<h2 class="headings">Please contact the admin</h2>
+	</div>
+</div>

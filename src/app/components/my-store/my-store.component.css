@@ -1,0 +1,41 @@
+.container{
+  background-color: white;
+  padding-top:1%;
+  padding-bottom:1%;
+}
+mat-card-content {
+
+  max-width: 320px;
+  margin:6px 5px 5px 0px;
+}
+mat-drawer {
+  position: fixed;
+  background-color: rgb(236, 236, 236);
+}
+img{
+  background-size: cover;
+  background-position: center center;
+  height:250px;
+  width: 100%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+}
+.data{
+  padding: 15px;
+}
+a{
+  cursor: pointer;
+  margin-top: 50px;
+
+}
+a{
+  text-decoration: none;
+  color:black;
+  font-family:Roboto, "Helvetica Neue", sans-serif;
+}
+
+a:hover,a:active{
+  color: rgb(41, 41, 41);
+}
+.p-num{
+  /*display: -webkit-inline-box ;*/
+}
+

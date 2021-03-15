@@ -1,0 +1,43 @@
+<mat-drawer-container class="container">
+
+  <mat-drawer-content style=" overflow: hidden;">
+    <!--      &lt;!&ndash; id="{{data._id}}" &ndash;&gt;-->
+
+    <h1 class="align-content-centere mt-3 mb-3">ORDERS</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of data ;index as i">
+          <th> {{i+1}}</th>
+          <td>{{data._id}}</td>
+          <td>{{data.product_info.name}}</td>
+          <td>{{data.buyer_info.name}}</td>
+          <td *ngIf="!data.isConfirmed">
+            <button mat-raised-button (click)="submitOTP(data._id)">Confirm order</button>
+          </td>
+          <td *ngIf="data.isConfirmed">
+            <span class="material-icons">
+              done
+            </span>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-evenly center">
+      <div class="p-num">
+        <a href="javascript: void(0);" (click)="previous()" id="pre"> &#171;&nbsp;</a>
+        <span id="pageNumber"></span>
+        <a href="javascript: void(0);" (click)="next()" id="nex">&nbsp; &#187;</a>
+      </div>
+    </div>
+  </mat-drawer-content>
+  <hr>
+
+
+</mat-drawer-container>

@@ -1,0 +1,312 @@
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+<link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+<script crossorigin="anonymous"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<div class="forgetpass" fxLayout="column" fxLayoutAlign="center center">
+
+  <div class="container">
+
+
+<!--    <div class="addpeas container row "   >-->
+<!--   -->
+<!--    </div>-->
+    <div class="row  ">
+      <div class="col-6 justify-content-center" *ngIf="showfom"  >
+        <br/>
+        <h3 *ngIf = "wallet" class="text-center">Your Wallet Balance : {{wallet}}</h3>
+        <br/>
+        <mat-tab-group mat-align-tabs="center" animationDuration="1ms">
+          <mat-tab label="Add Peas to your wallet">
+            <br>
+
+            <form #form='ngForm' (ngSubmit)="onSubmit(form)">
+              <div><p>1 Pea = 1 Euro</p></div>
+              <div fxLayout="column" fxLayoutAlign="center" >
+                <p>Amount of Peas: </p>
+                <mat-form-field>
+
+                  <input  matInput
+                          name="peas"
+                          type="number"
+                          placeholder="Peas"
+                          ngModel
+                          required
+                          [(ngModel)]="peas"  />
+
+                  <div [innerHtml]='peas_msg' *ngIf="peas_msg" style="color: #ff0000;"></div>
+
+                </mat-form-field>
+              </div>
+              <div fxLayout="column" fxLayoutAlign="center" >
+                <!-- address -->
+                <p>Billing Address: <mat-icon matSuffix>location_on</mat-icon></p>
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="country"
+                    name="country"
+                    ngModel
+                    required [maxLength]="50">
+                </mat-form-field>
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="City"
+                    name="city"
+                    ngModel
+                    required >
+                </mat-form-field>
+
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="street"
+                    name="street"
+                    ngModel
+                    required >
+                </mat-form-field>
+                <mat-form-field>
+                  <input
+                    matInput
+                    type="number"
+                    placeholder="House Number"
+                    name="number"
+                    ngModel
+                    required [(ngModel)]="number"  >
+                  <div [innerHtml]='number_msg' *ngIf="number_msg" style="color: #ff0000;"></div>
+                </mat-form-field>
+
+                <mat-form-field>
+                  <input
+                    matInput
+                    type="zip"
+                    placeholder="zip"
+                    name="zip"
+                    ngModel
+                    maxlength="5"
+                    required [(ngModel)]="zip">
+                  <div [innerHtml]='zip_msg' *ngIf="zip_msg" style="color: #ff0000;"></div>
+
+                </mat-form-field>
+                <!-- submit -->
+                <button mat-raised-button type="submit"  [disabled]="!form.valid">NEXT</button>
+              </div>
+            </form>
+
+          </mat-tab>
+          <!-- TAB" -->
+          <mat-tab label="Convert Peas to Real Money">
+            <br>
+            <form #f='ngForm' (ngSubmit)="onSubmitMoney(f)">
+              <div><p>1 Pea = 1 Euro</p></div>
+              <div fxLayout="column" fxLayoutAlign="center" >
+                <p>Amount of Peas: </p>
+                <mat-form-field>
+
+                  <input  matInput
+                          name="money"
+                          type="number"
+                          placeholder="Peas"
+                          ngModel
+                          required
+                          [(ngModel)]="money"  />
+
+                  <div  *ngIf="peas_msg_real" [innerHtml]='peas_msg_real' style="color: #ff0000;"></div>
+
+                </mat-form-field>
+
+
+              </div>
+              <div fxLayout="column" fxLayoutAlign="center" >
+
+                <!-- address -->
+                <p>Billing Address: <mat-icon matSuffix>location_on</mat-icon></p>
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="country"
+                    name="convert_country"
+                    ngModel
+                    required [maxLength]="50">
+                </mat-form-field>
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="City"
+                    name="convert_city"
+                    ngModel
+                    required >
+                </mat-form-field>
+
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="street"
+                    name="convert_street"
+                    ngModel
+                    required >
+                </mat-form-field>
+                <mat-form-field>
+                  <input
+                    matInput
+                    type="number"
+                    placeholder="House Number"
+                    name="convert_number"
+                    ngModel
+                    required [(ngModel)]="convert_number"  >
+                  <div [innerHtml]='number_msg_real' *ngIf="number_msg_real" style="color: #ff0000;"></div>
+                </mat-form-field>
+
+                <mat-form-field>
+                  <input
+                    matInput
+                    type="zip"
+                    placeholder="zip"
+                    name="convert_zip"
+                    ngModel
+                    maxlength="5"
+                    required [(ngModel)]="convert_zip">
+                  <div [innerHtml]='zip_msg_real' *ngIf="zip_msg_real" style="color: #ff0000;"></div>
+
+                </mat-form-field>
+                <!-- submit -->
+                <button mat-raised-button type="submit" [disabled]="!f.valid">NEXT</button>
+              </div>
+            </form>
+
+
+          </mat-tab>
+
+        </mat-tab-group>
+      </div>
+
+      <div class="col-md-4"  *ngIf="showdetail1">
+        <h1 class="text-center mt-3 mb-100">DETAIL</h1>
+        <div class="card-body" style="">
+        <h2>Amount:</h2>
+        <p>{{peasData.peas}}
+        </p>
+        <h2> Bill address</h2>
+          <p>Street: {{peasData.street}}</p>
+             <p>Number: {{peasData.number}}</p>
+             <p>Country: {{peasData.country}}</p>
+             <p>City: {{peasData.city}}</p>
+             <p>CAP: {{peasData.zip}}</p>
+      </div>
+      </div>
+      <div class="col-md-4"  *ngIf="showdetail2">
+        <h1 class="text-center mt-3 mb-100">DETAIL</h1>
+        <div class="card-body" style="">
+          <h2>Amount:</h2>
+          <p>{{convertData.money}}
+          </p>
+          <h2> Bill address</h2>
+          <p>Street: {{convertData.convert_street}}</p>
+          <p>Number: {{convertData.convert_number}}</p>
+          <p>Country: {{convertData.convert_country}}</p>
+          <p>City: {{convertData.convert_city}}</p>
+          <p>CAP: {{convertData.convert_zip}}</p>
+                  </div>
+      </div>
+      <div class="col-md-6" >
+        <div class="card"  *ngIf="showPaymethod">
+          <h5 class="text-center mt-5 mb-4">PAY METHOD</h5>
+          <div class="card-body">
+            <img src="../../../assets/image/credit.png" class="im"  (click)="changeState()"  >
+            <img src="../../../assets/image/pay.png" class="im"  (click)="openPayPal()">
+          </div>
+        </div>
+        <div class="card "   *ngIf="showcreditcard" >
+          <h5 class="text-center mt-3 mb-100">CREDIT CARD </h5>
+          <div class="card-body">
+
+            <form (ngSubmit)="emitSavedCard()" [formGroup]="ccForm" autocomplete="off" class="cc-form form-inline" fxLayout="column"
+                  fxLayoutAlign="center" fxLayoutGap="10px">
+
+              <mat-form-field>
+                <label>
+                  <input #ccNumber aria-label="Card holder name" class="cc-form__input"
+                         formControlName="cardHolder" id="cc-holder-name" matInput maxlength="22"
+                         placeholder="Card Holder name" required title="Card holder name"
+                         type="text">
+                </label>
+              </mat-form-field>
+              <div class="cc-form__error">
+                {{getCardHolderValidation()}}
+              </div>
+              <mat-form-field>
+                <label>
+                  <input #ccNumber aria-label="Card number" class="cc-form__input" formControlName="cardNumber"
+                         id="cc-number"
+                         matInput maxlength="19" placeholder="Card number" required title="Card number" type="text">
+                </label>
+              </mat-form-field>
+              <div class="cc-form__error" >
+                {{getCardNumberValidation()}}
+              </div>
+
+
+
+              <div class="row">
+                <div class="col-md-2"> <label class="cc-form__label" for="cc-expiration-month">Exp Date :</label></div>
+                <div class="col-md-5">
+
+                    <select aria-label="Expiration month" class="cc-form__select form-control"formControlName="expirationMonth"
+                            id="cc-expiration-month" style=" margin-right: 15px;">
+                      <option *ngFor="let month of months" value="{{month}}">{{month}}
+                      </option>
+                    </select>
+                    <select aria-label="Expiration year" class="cc-form__select form-control"formControlName="expirationYear"
+                            id="cc-expiration-year" >
+                      <option *ngFor="let year of years" value="{{year}}">{{year}}
+                      </option>
+                    </select>
+                    <div class="cc-form__error" style=" margin-left: 15px;">
+                      {{getExpirationValidation()}}
+                    </div>
+
+                </div>
+                  <div class="col-md-2">
+                    <mat-form-field id="cvv">
+                    <label>
+                      <input aria-label="CCV" class="cc-form__input cc-form__input--short" formControlName="ccv" id="cc-ccv"
+                             matInput maxlength="4" minlength="3"
+                             placeholder="CCV" title="CCV" type="text"   >
+                    </label>
+                  </mat-form-field>
+                    <div class="cc-form__error"  style=" ">
+                      {{getCCVValidation()}}
+                    </div>
+                  </div>
+
+
+              </div>
+
+
+
+
+              <button class="btn mt-4" mat-raised-button type="submit">Send
+              </button>
+            </form>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</div>

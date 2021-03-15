@@ -1,0 +1,75 @@
+.name-fields {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  /*align-items: center;*/
+}
+
+.name-field-class {
+  width: 250px;
+}
+.mgErr{
+  color: red;
+  text-align: left;
+
+  font-size: small;
+  margin-top: 1px;
+}
+
+mat-form-field {
+  width: 430px;
+  margin: 1%;
+  display: flex;
+  flex-direction: column;
+  /*align-items: center;*/
+}
+
+mat-checkbox {
+  width: 430px;
+  margin: 15px;
+  /*display: flex;*/
+  flex-direction: row;
+}
+
+
+/*.wrapper {*/
+/*  display: flex;*/
+/*  flex-direction: row;*/
+/*  flex-flow: row wrap;*/
+/*  !*position: relative;*!*/
+/*}*/
+
+/*.country-code-class {*/
+/*  !*position: absolute;*!*/
+/*  left: 0;*/
+/*  height: 20px;*/
+/*  padding-top: 30px;*/
+/*}*/
+.row{
+  background: white;
+
+}
+
+
+li {
+  list-style: none;
+}
+
+/*.account-login {*/
+/*  padding: 5px;*/
+/*  margin: 5px;*/
+/*}*/
+
+button{
+  background-color: #688B9A;
+  color: white;
+}
+.pass-class {
+  position: relative;
+}
+
+.pass-btn-hide-class {
+  position: absolute;
+  right: 4px;
+}
+

@@ -1,0 +1,7 @@
+.container {
+    margin-top: 25px;
+  }
+.btn ,mat-icon{
+  background-color: #688B9A;
+  color: white;
+}

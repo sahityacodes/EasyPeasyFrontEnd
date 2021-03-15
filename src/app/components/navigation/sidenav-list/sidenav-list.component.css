@@ -1,0 +1,22 @@
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover, a:active {
+  color: #d2d2d2;
+}
+
+.nav-icons {
+  display: inline-block;
+  padding-left: 6px;
+}
+.span-wallet{
+  color : #50b323;
+  -webkit-text-stroke: 0.5px black; 
+  font-size: large;
+}
+button{
+  text-transform:uppercase;
+  border: none;
+}

@@ -1,0 +1,213 @@
+<div class="container">
+  <div class="row m-2">
+    <div class="col-md-5" style="align-content: center;" >
+      <img class="mt-5"
+        src="assets/image/register.png"
+        style="width: 100%; height: 80%; "
+      />
+    </div>
+    <div class="col mb-3">
+      <div class="card mt-3">
+        <div class="card-body">
+
+          <form #f="ngForm"  class="ml-3" (ngSubmit)="onSubmit(f)">
+            <div class="name-fields">
+              <mat-form-field class="name-field-class" color="accent">
+                <label>
+                  <input
+                    #firstNameInput="ngModel"
+                    matInput
+                    name="firstName"
+                    ngModel
+                    placeholder="first name"
+                    required
+                    type="text"
+                  />
+                  <!--              <mat-error *ngIf="firstNameInput.hasError('required')" class="mgErr">field must not be empty</mat-error>-->
+                </label>
+              </mat-form-field>
+
+              <mat-form-field class="name-field-class" color="accent">
+                <label>
+                  <input
+                    #lastNameInput="ngModel"
+                    matInput
+                    name="lastName"
+                    ngModel
+                    placeholder="last name"
+                    required
+                    type="text"
+                  />
+                  <mat-error *ngIf="msgName" class="mgErr">{{ msgName }}</mat-error>
+                  <!--              <mat-error *ngIf="lastNameInput.hasError('required')">field must not be empty</mat-error>-->
+                </label>
+              </mat-form-field>
+            </div>
+
+            <div class="name-fields">
+              <mat-form-field class="name-field-class" color="accent">
+                <label>
+                  <input
+                    #userNameInput="ngModel"
+                    matInput
+                    name="userName"
+                    ngModel
+                    placeholder="username"
+                    required
+                    type="text"
+                  />
+                  <!--              <mat-error *ngIf="userNameInput.hasError('required')">field must not be empty</mat-error>-->
+                  <mat-error *ngIf="msgUserName" class="mgErr">{{msgUserName}}</mat-error>
+                </label>
+              </mat-form-field>
+              <mat-form-field class="name-field-class" color="accent">
+                <label>
+                  <input
+                    #emailInput="ngModel"
+                    email
+                    matInput
+                    name="email"
+                    ngModel
+                    placeholder="email"
+                    required
+                    type="text"
+                  />
+                  <mat-error *ngIf="msgEmail" class="mgErr">{{ msgEmail }}</mat-error>
+                </label>
+                <!--            <mat-error *ngIf="emailInput.hasError('required')">field must not be empty</mat-error>-->
+                <!--            <mat-error *ngIf="!emailInput.hasError('required')">enter valid mail address</mat-error>-->
+              </mat-form-field>
+            </div>
+            <div class="name-fields">
+              <mat-form-field class="name-field-class" color="accent">
+                <label>
+                  <input
+                    #fiscalCodeInput="ngModel"
+                    matInput
+                    maxlength="16"
+                    name="fiscalCode"
+                    ngModel
+                    placeholder="fiscal code"
+                    required
+                    type="text"
+                  />
+                  <mat-error *ngIf="msgFis" class="mgErr">{{ msgFis }}</mat-error>
+                </label>
+                <!--      check format of the fiscal code *****************************************************************************************-->
+              </mat-form-field>
+              <mat-form-field class="name-field-class" color="accent">
+                <label>
+                  <input
+                    #phoneNumberInput="ngModel"
+                    matInput
+                    name="phoneNumber"
+                    ngModel
+                    placeholder="phone number"
+                    required
+                    type="text"
+                  />
+                  <mat-error *ngIf="msgMobile" class="mgErr">{{msgMobile}}</mat-error>
+                </label>
+              </mat-form-field>
+            </div>
+            <div class="name-fields">
+              <mat-form-field class="name-field-class" color="accent">
+                <label>
+                  <input
+                    #pwInput="ngModel"
+                    [(ngModel)]="account.password"
+                    [type]="hidePass ? 'password' : 'text'"
+                    matInput
+                    name="password"
+                    placeholder="password"
+                    required
+                  />
+                  <a
+                    (click)="hidePass = !hidePass"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hidePass"
+                    class="pass-btn-hide-class"
+                    mat-icon-button
+                    matSuffix
+                  >
+                    <mat-icon>{{hidePass ? "visibility_off" : "visibility"}}</mat-icon>
+                  </a>
+                </label>
+
+                <!--                  <mat-error *ngIf="passwordInput.hasError('required')">field must not be empty</mat-error>-->
+              </mat-form-field>
+
+              <mat-form-field class="name-field-class" color="accent">
+                <label>
+                  <input
+                    #passConfirmInput="ngModel"
+                    [type]="hidePass1 ? 'password' : 'text'"
+                    matInput
+                    name="confirmPassword"
+                    ngModel
+                    placeholder="password confirmation"
+                    required
+                  />
+                  <a
+                    (click)="hidePass1 = !hidePass1"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hidePass1"
+                    class="pass-btn-hide-class"
+                    mat-icon-button
+                    matSuffix
+                  >
+                    <mat-icon>{{hidePass1 ? "visibility_off" : "visibility"}}</mat-icon>
+                  </a>
+                </label>
+              </mat-form-field>
+
+            </div>
+            <mat-error *ngIf="msgPass" class="mgErr">{{ msgPass }}</mat-error>
+            <app-password-strength-bar
+              [barLabel]="barLabel"
+              [passwordToCheck]="account.password">
+            </app-password-strength-bar>
+            <mat-form-field class="name-field-class" color="accent">
+              <mat-label>Birth date</mat-label>
+
+              <label>
+                <input
+                  [matDatepicker]="picker"
+                  [max]="maxDate"
+                  matInput
+                  name="birthDate"
+                  ngModel
+                />
+              </label>
+              <mat-datepicker-toggle
+                [for]="picker"
+                matSuffix
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-checkbox color="primary"
+            >Agree to terms and conditions?
+            </mat-checkbox
+            >
+            <button [disabled]="f.invalid" mat-raised-button type="submit">
+              SUBMIT
+            </button>
+          </form>
+          <ul
+            class="account-login"
+            fxLayout
+            fxLayoutAlign="center center"
+            fxLayoutGap="10px"
+          >
+            <li>already have an account?</li>
+            <a>
+              <button mat-raised-button routerLink="/login">LOGIN</button>
+            </a>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

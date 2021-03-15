@@ -1,0 +1,86 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+
+<div class="container">
+  <div class="card">
+
+    <div fxLayout="column" fxLayoutAlign="space-around center">
+      <br/>
+      <h2>Hello {{username}}!</h2>
+      <br/>
+      <h3>Your Account Details: </h3>
+      <br/>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center">
+
+      <div fxLayout="column" fxLayoutAlign="start start">
+
+        <p> Name : {{lastname}} {{name}} </p>
+
+        <p>Email : {{email}} <button mat-mini-fab class="btn" aria-label="Edit" (click)="editEmail()">
+            <mat-icon>edit</mat-icon>
+          </button></p>
+        <form #f='ngForm' (ngSubmit)="onChangeEmail(f)" *ngIf="editingEmail">
+          <mat-form-field>
+            <input matInput placeholder="New Email" name="email" ngModel required>
+          </mat-form-field>
+          <button mat-raised-button type="submit" color="primary">Confirm</button>
+          <div [innerHtml]='email_msg' *ngIf="email_msg" style="color: #ff0000;"></div>
+        </form>
+
+        <p>Codice Fiscale : {{cf}} </p>
+
+        <p>Phone Number : {{phoneNumber}} <button mat-mini-fab   class="btn"  aria-label="Edit" (click)="editMobile()">
+            <mat-icon>edit</mat-icon>
+          </button></p>
+        <form #fMobile='ngForm' (ngSubmit)="onChangeMobile(fMobile)" *ngIf="editingMobile">
+          <mat-form-field>
+            <input matInput placeholder="New Mobile"  name="mobile" ngModel required>
+          </mat-form-field>
+          <button mat-raised-button type="submit" color="primary">Confirm</button>
+          <div [innerHtml]='mobile_msg' *ngIf="mobile_msg" style="color: #ff0000;"></div>
+        </form>
+
+        <p>Date Of Birth : {{birthdate | date:'MM/dd/yyyy'}} </p>
+
+      </div>
+
+      <div fxLayout="column" fxLayoutAlign="start start" fxFlexOffset="200px">
+        <p>Home Address: <button mat-mini-fab  class="btn" aria-label="Edit" (click)="editAddress()">
+            <mat-icon>edit</mat-icon>
+          </button></p>
+
+        <p>{{street}} {{number}}</p>
+        <p>{{city}} </p>
+        <p>{{country}}</p>
+        <p>{{zip}}</p>
+
+        <form #fAddress='ngForm' (ngSubmit)="onChangeAddress(fAddress)" *ngIf="editingAddress" >
+          <div fxLayout="column" fxLayoutAlign="start start">
+            <mat-form-field>
+              <input matInput name="street" placeholder="street" ngModel="{{street}}" >
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput name="number" placeholder="number" ngModel="{{number}}" >
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput name="city" placeholder="city" ngModel="{{city}}" >
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput name="country" placeholder="country" ngModel="{{country}}" >
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput name="zip" placeholder="zip" ngModel="{{zip}}" >
+            </mat-form-field>
+          </div>
+          <button mat-raised-button type="submit" class="btn"  >Confirm</button>
+        </form>
+      </div>
+
+
+    </div>
+    <br/>
+    <br/>
+  </div>
+</div>

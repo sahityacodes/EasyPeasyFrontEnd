@@ -1,0 +1,74 @@
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+<link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+<script crossorigin="anonymous"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<div class="login" fxLayout="column" fxLayoutAlign="center center">
+
+  <div class="container">
+    <div class="row m-2 p-5">
+      <div class="col-md-6">      <img
+        src="assets/image/Login1.png"
+        style="width: 100%; height: 100%; "
+      /></div>
+      <div class="col-md-6 " style="padding-top: 7%;">
+        <!-- Card -->
+        <div class="card  text-center ">
+          <div class="card-body ">
+            <form fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px" #f='ngForm' (ngSubmit)="onLogin(f)">
+              <mat-error *ngIf=" _response && _response.result == 'fail'">{{_response.message}}</mat-error>
+              <mat-form-field>
+                <label>
+                  <input
+                    matInput
+                    placeholder="username"
+                    name="username"
+                    ngModel
+                    #usernameInput='ngModel'>
+                </label>
+                <mat-error *ngIf="usernameInput.hasError('required')">please enter the username</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <label>
+                  <input matInput [type]="hidePass ? 'password' : 'text'" name="password" placeholder="password"
+                         required
+                         [(ngModel)]="password"
+                         #passwordInput='ngModel'>
+                  <a class="pass-btn-hide-class" mat-icon-button matSuffix (click)="hidePass = !hidePass"
+                          [attr.aria-label]="'Hide password'"
+                          [attr.aria-pressed]="hidePass">
+                    <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </a>
+                </label>
+                <mat-error *ngIf="passwordInput.hasError('required')">please enter password</mat-error>
+              </mat-form-field>
+              <a href="forgotpassword" class="mb-4" color="primary">
+                Forgot password?
+              </a>
+
+              <button mat-raised-button type="submit"
+                      [disabled]="f.invalid">Submit
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Card -->
+
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+
+  </div>
+
+</div>
+

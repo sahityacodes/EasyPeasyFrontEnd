@@ -1,0 +1,27 @@
+@keyframes bouncing {
+  0% {
+    top: 40%;
+  }
+  100% {
+    top: 30%;
+  }
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.page-overlay-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 1009;
+  background: rgba(132, 132, 132, 0.5);
+}

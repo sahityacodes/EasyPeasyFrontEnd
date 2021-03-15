@@ -1,0 +1,57 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+
+
+<div class="container" *ngIf="item">
+	<div class="card">
+		<div class="container-fliud">
+			<div class="row justify-content-center">
+				<h2>Checkout Page</h2>
+			</div>
+			<div class="wrapper row pt-4">
+				<div *ngIf="item.data" class="preview col-md-6">
+					<div class="potrait">
+						<img src={{item.data.image}} alt="Image not found">
+					</div>
+					<h4 class="float-left pt-2">{{item.name}}</h4>
+					<h5>Meet Point</h5>
+					<span class="description">Location : {{item.data.street}}, {{item.data.zip}}, {{item.data.city}},
+						{{item.data.country}}</span>
+					<span *ngIf="item.data.real_delivery_time" class="description">Availability : Till
+						{{item.data.real_delivery_time | date }}</span>
+					<h5>Seller's Details</h5>
+					<span class="description">Email : {{item.data.seller.email}}</span>
+					<span class="description">Contact No : {{item.data.seller.mobile}}</span>
+				</div>
+				<div class="details col-md-6">
+
+					<h5>Your Details</h5>
+
+					<div class="description">
+						Email : {{item.buyerEmail}} <br />
+
+						Codice Fiscale :{{item.codiceFiscale}} <br />
+					</div>
+					<div class="row pt-5">
+						<div class="col priceDetails">
+							Price <br />
+							Service Charges <br />
+							<hr>
+							Total Price <br />
+						</div>
+						<div class="col-md-push-6 price">
+							{{item.data.price}} Peas <br />
+							{{item.servicecharge | number: '1.2-2'}} Peas <br />
+							<hr>
+							{{item.data.total_price}} Peas
+						</div>
+					</div>
+					<div class="row justify-content-end pt-5">
+						<button mat-flat-button (click)="submitOrder()"  class="buy-now btn btn-default"
+							type="button">Submit Order</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

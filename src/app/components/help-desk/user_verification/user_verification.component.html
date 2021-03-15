@@ -1,0 +1,77 @@
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+<link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+<script crossorigin="anonymous"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<div class="container">
+  <div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <!-- Card -->
+    <h5 class="text-center mt-1 mb-3">Verify user</h5>
+    <div class="card  text-center pb-2">
+      <div class="card-body ">
+        <form fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px" #f='ngForm' (ngSubmit)="onSubmit(f)">
+          <mat-form-field>
+            <label>
+              <input
+                matInput
+                placeholder="codice Fiscale"
+                name="codiceFiscale"
+                ngModel
+                maxlength="16"
+                #codiceFiscaleInput='ngModel'>
+            </label>
+            <mat-error *ngIf="codiceFiscaleInput.hasError('required')">please enter the Codice Fiscale</mat-error>
+          </mat-form-field>
+
+          <div *ngIf="msgEr" [innerHtml]='msgEr' style="color: #ff0000;"></div>
+          <div class="card mt-3  pt-4 " *ngIf="userInfo" >
+            <div class="row">
+              <div class="col-6">
+                <label for="name">Name:</label>
+              </div>
+              <div class="col-6"><p *ngIf="name" [innerHtml]='name' id="name"></p>
+              </div>
+              <div class="col-6">
+                <label for="sureName">surName:</label>
+              </div>
+              <div class="col-6">
+                <p *ngIf="surName" [innerHtml]='surName' id="sureName"></p>
+              </div>
+              <div class="col-6">
+                <label for="codiceFiscaletext">Codice Fiscale:</label>
+              </div>
+              <div class="col-6">
+                <p *ngIf="codiceFiscaletext" [innerHtml]='codiceFiscaletext' id="codiceFiscaletext"></p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <h3 *ngIf="msg" [innerHtml]='msg' id="msg" style="color: #37ff00;"></h3>
+              </div>
+
+            </div>
+
+          </div>
+
+          <button  class="btn  mt-4" type="submit" color="primary">Verify
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+</div>
+

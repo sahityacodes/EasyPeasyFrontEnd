@@ -1,0 +1,38 @@
+
+.container{
+  background: white;
+}
+.card{
+  border: white;
+  height: 500px;
+}
+.cc-form__error {
+color: red;
+text-align: left;
+  width: 200px;
+font-size: small;
+margin-top: 1px;
+
+}
+.im{
+  width: 50%;
+  height:50%;
+  margin-left: 25%;
+}
+.cc-form__label{
+  text-align: left;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+button{
+  background-color: #688B9A;
+  color: white;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

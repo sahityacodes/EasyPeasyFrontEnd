@@ -1,0 +1,45 @@
+<mat-nav-list>
+
+  <a routerLink="/"> <img src="/assets/image/log1.png" alt="Logo" width="50%" height="50%"></a>
+
+
+  <a mat-list-item (click)="products()">
+    <mat-icon>shopping_bag</mat-icon>
+    <span class="nav-icons">PRODUCTS</span>
+  </a>
+  <a mat-list-item (click)="services()">
+    <mat-icon>shopping_bag</mat-icon>
+    <span class="nav-icons">SERVICES</span>
+  </a>
+  <a *ngIf="!isAuth" mat-list-item routerLink="/login" (click)="closeDrawer()">
+    <mat-icon>input</mat-icon>
+    <span class="nav-icons">LOGIN</span>
+  </a>
+  <a *ngIf="!isAuth" mat-list-item routerLink="/signup" (click)="closeDrawer()">
+    <mat-icon>face</mat-icon>
+    <span class="nav-icons">SIGNUP</span>
+  </a>
+
+  <a *ngIf="isAuth && authInfo !== null" mat-list-item>
+    <button mat-stroked-button class="mat-login-header ">
+      <img src="assets/image/peas.svg" class="responsive" alt="Login">
+      <span class="span-wallet">{{wallet}}</span>
+    </button>
+  </a>
+  <a *ngIf="isAuth && authInfo !== null" mat-list-item>
+      <mat-icon>storefront</mat-icon>
+      <span class="nav-icons">MY STORE</span>
+  </a>
+  <a *ngIf="isAuth && authInfo !== null" mat-list-item>
+      <mat-icon>sell</mat-icon>
+      <span class="nav-icons">BECOME A SELLER</span>
+  </a>
+
+  <a *ngIf="isAuth" mat-list-item routerLink="/" (click)="closeDrawer();logOut()">
+    <mat-icon>exit_to_app</mat-icon>
+    <span class="nav-icons">LOGOUT</span>
+  </a>
+
+
+
+</mat-nav-list>
