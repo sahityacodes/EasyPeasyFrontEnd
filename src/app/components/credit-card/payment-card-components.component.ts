@@ -245,7 +245,7 @@ export class PaymentCardComponents implements OnInit {
         .post(
           '/api/easypeasy/v1/wallet/transfer',
           {
-            receiver: localStorage.getItem('walletAddress'),
+            address: localStorage.getItem('walletAddress'),
             amount: this.peasData.peas * 100,
             isFromServer: 'true'
           },
