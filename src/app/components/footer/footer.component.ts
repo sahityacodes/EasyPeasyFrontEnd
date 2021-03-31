@@ -20,12 +20,11 @@ export class FooterComponent implements OnInit {
   ngOnInit(): void {
 
     this.authSubscription = this.authService.authData.subscribe(data => {
-      if (!data.status) {
+      if (data.error) {
         this.isAuth = false
-
       } else {
         this.isAuth = true;
-        this.isHD=data.role_helpdesk
+        this.isHD=data.data.role_helpdesk
       }
     })
   }

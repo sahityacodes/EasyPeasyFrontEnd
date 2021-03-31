@@ -33,9 +33,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     
     this.authSubscription = this.authService.authData.subscribe(data => {
       this._response = data;
-      if(this._response.result == "fail"){
+      if(this._response.error){
+        this._response = data.error;
+        console.log(this._response)
         this.router.navigate(['/login'])
-        this.spinnerService.resetSpinner();
+        this.spinnerService.requestEnded();
       }else{
         this.authService.getWalletBalance(this._response.data.wallet.address);
         this.router.navigate(['/'])

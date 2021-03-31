@@ -1,25 +1,30 @@
-
-li{
-
+li {
   list-style: none;
-  font-family:Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
   align-self: center;
   font-size: medium;
   padding-left: 2%;
 }
-
-a{
+.options {
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(191, 191, 191, 0.15);
+}
+a {
   cursor: pointer;
   text-decoration: none;
   color: #2b2b2b;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-a:hover,a:active{
+a:hover,
+a:active {
   color: #706f6f;
 }
-
-.a-text{
+.example-spacer {
+  flex: 1 1 auto;
+}
+.a-text {
   text-align: center;
 }
 /*.nav-icons{*/
@@ -36,49 +41,55 @@ a:hover,a:active{
   margin-left: 4%;
   text-align: center;
   pointer-events: none;
-  color:#2b2b2b;
+  color: #2b2b2b;
 }
-  .mat-icon{font-size: 16px;}
+.mat-icon {
+  font-size: 16px;
+}
 
-  #search {
-    width: 50%;
-    margin-left: 10%;
-  }
-  ul{
-    margin-bottom: 0%;
-  }
-  button{
-    text-transform:uppercase;
-    border: none;
-  }
-  .sea{
-    font-family: 'Lucida Console', Courier, monospace;
-    font-size:small;
-    letter-spacing: 5px;
-  }
+#search {
+  width: 50%;
+  margin-left: 5%;
+}
+ul {
+  margin-bottom: 0%;
+}
+button {
+  text-transform: uppercase;
+  border: none;
+  padding-left: 3%;
+}
+.sea {
+  font-family: "Lucida Console", Courier, monospace;
+  font-size: small;
+  letter-spacing: 5px;
+}
 
-.span-wallet{
-    color : #50b323;
-    -webkit-text-stroke: 0.5px black;
-    font-size: large;
-  }
-  figcaption{
-    font-size: x-small;
-    color: white;
-    text-align: center;
-    padding: 0px;
-    }
-    .account img{
-      height: 35px;
-      width: 35px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 10px;
-      }
-      .account{
-          margin: 0 0 0rem;
-      }
-      .account .personal{
-        border-radius: 50%;
-      }
+.span-wallet {
+  color: #50b323;
+  -webkit-text-stroke: 0.5px black;
+  font-size: large;
+}
+figcaption {
+  font-size: x-small;
+  color: white;
+  text-align: center;
+  padding: 0px;
+}
+.account img {
+  height: 35px;
+  width: 35px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+.account {
+  margin: 0 0 0rem;
+}
+.account .personal {
+  border-radius: 50%;
+}
+.dropdown-menu {
+  width: 100%;
+}

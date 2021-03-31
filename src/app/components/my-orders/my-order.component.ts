@@ -57,7 +57,7 @@ export class MyOrderComponent implements OnInit {
 
     this.http
       .post(
-        '/api/easypeasy/v1/product/seller/orders',
+        '/product/seller/orders',
         { page_size: 10, page_number: pageNum, sellerId: this.sellerId },
         httpOptions
       )
@@ -66,7 +66,6 @@ export class MyOrderComponent implements OnInit {
           this.previous();
         }
         this.data = res;
-        console.log(this.data);
         this.displayNUmber(pageNum);
       });
   }
@@ -100,7 +99,7 @@ export class MyOrderComponent implements OnInit {
     };
     this.http
       .post(
-        '/api/easypeasy/v1/order/otp/get',
+        '/order/otp/get',
         { order_id: _id },
         httpOptions
       )
@@ -121,7 +120,7 @@ export class MyOrderComponent implements OnInit {
               try {
                 this.http
                   .post(
-                    '/api/easypeasy/v1/order/otp/confirm',
+                    '/order/otp/confirm',
                     { order_id: _id, otp_code: otpcode },
                     httpOptions
                   )
@@ -135,7 +134,6 @@ export class MyOrderComponent implements OnInit {
                       }
                       );
                       this.getItemList(this.pageNo);
-                      console.log(res);
                       // this.authService.getWallet(this.dataOnComplete.data.seller_info.wallet["$numberDecimal"], '/my_order/'+localStorage.getItem('userName'));
                         this.authService.getWalletBalance(localStorage.getItem('walletAddress'));
                     },  (err: HttpErrorResponse) => {

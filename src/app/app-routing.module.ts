@@ -15,9 +15,11 @@ import {MyOrderComponent} from './components/my-orders/my-order.component';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import { PaymentCardComponents } from './components/credit-card/payment-card-components.component';
 import { PayMethodComponent } from './components/pay-method/pay-method.component';
-
+import { EditItemComponent } from "./components/edit-tem/edit-item.component";
 import {NgModule} from "@angular/core";
 import { AccountDetailsComponent } from "./components/account-details/account-details.component";
+import { SearchResultsComponent } from "./components/search-result/search-result.component";
+
 
 
 const routes: Routes = [
@@ -27,6 +29,7 @@ const routes: Routes = [
   {path: 'logout', component: HomepageComponent},
   {path: 'items_list', pathMatch: 'full', component: ItemsListComponent},
   {path: 'sell_item', component: SellItemComponent},
+  {path: 'edit_item/:itemId', component: EditItemComponent},
   {path: 'item-details/:itemId', component: ItemDetailsComponent},
   {path: 'help_desk', component: HelpDeskComponent},
   {path: 'user/verify', component: UserVerificationComponent} ,
@@ -38,6 +41,7 @@ const routes: Routes = [
   {path: 'my_order/:userId', component: MyOrderComponent},
   {path: 'creditcard', component: PaymentCardComponents},
   {path: 'account_details', component: AccountDetailsComponent},
+  {path: 'searchResult',pathMatch: 'full', component: SearchResultsComponent},
   {path: '**', component: PageNotFoundComponent},
 ]
 

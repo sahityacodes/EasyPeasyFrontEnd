@@ -16,7 +16,7 @@ export class AccountDetailsComponent implements OnInit {
     withCredentials: true,
   };
   res: any;
-  url: string = '/api/easypeasy/v1/user/update';
+  url: string = '/user/update';
 
   formData = new FormData();
 
@@ -86,7 +86,6 @@ export class AccountDetailsComponent implements OnInit {
       this.http.post<any>(this.url, this.formData, this.httpOptions).subscribe({
         next: (data) => {
           data.status = true;
-          console.log(data);
           if (data.result == 'success') {
             Swal.fire({
               title: 'Please Check your Phone for the OTP code',
@@ -103,13 +102,12 @@ export class AccountDetailsComponent implements OnInit {
                 try {
                   this.http
                     .post(
-                      '/api/easypeasy/v1/user/update/confirm',
+                      '/user/update/confirm',
                       { otp: otpcode },
                       this.httpOptions
                     )
                     .subscribe(
                       (res) => {
-                        console.log(res);
                         this.res = res;
                         Swal.fire({
                           icon: 'success',
@@ -159,7 +157,6 @@ export class AccountDetailsComponent implements OnInit {
       this.http.post<any>(this.url, this.formData, this.httpOptions).subscribe({
         next: (data) => {
           data.status = true;
-          console.log(data);
           if (data.result == 'success') {
             Swal.fire({
               title: 'Please Check your email for the OTP code',
@@ -176,13 +173,12 @@ export class AccountDetailsComponent implements OnInit {
                 try {
                   this.http
                     .post(
-                      '/api/easypeasy/v1/user/update/confirm',
+                      '/user/update/confirm',
                       { otp: otpcode },
                       this.httpOptions
                     )
                     .subscribe(
                       (response) => {
-                        console.log(response);
                         this.res = response;
                         Swal.fire({
                           icon: 'success',
@@ -190,7 +186,6 @@ export class AccountDetailsComponent implements OnInit {
                           showConfirmButton: true,
                           allowOutsideClick: false,
                         });
-                        console.log(response);
                         localStorage.setItem('mobile', form.value.mobile);
                         window.location.reload();
                       },

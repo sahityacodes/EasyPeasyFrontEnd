@@ -2,14 +2,14 @@ body {
   font-family: "open sans";
   overflow-x: hidden;
 }
-.carousel-control-prev-icon{
-  background-image: url('https://apufpel.com.br/assets/img/seta_prim.png') !important;
- }
- .carousel-control-next-icon{
-    background-image: url('https://apufpel.com.br/assets/img/seta_ult.png')!important;
- }
+.carousel-control-prev-icon {
+  background-image: url("https://apufpel.com.br/assets/img/seta_prim.png") !important;
+}
+.carousel-control-next-icon {
+  background-image: url("https://apufpel.com.br/assets/img/seta_ult.png") !important;
+}
 
- img {
+img {
   max-width: 100%;
   max-height: 100%;
 }
@@ -112,7 +112,6 @@ body {
   -ms-flex-direction: column;
   flex-direction: column;
   font-family: "futura-pt-n4", "futura-pt", Tahoma, Verdana, Arial, sans-serif;
-
 }
 
 .colors {
@@ -126,7 +125,7 @@ body {
 .colors {
   font-weight: bold;
 } */
-.item-title{
+.item-title {
   font-weight: bold;
 }
 .checked,
@@ -177,8 +176,7 @@ body {
 }
 
 .buy-now {
-
-  background-color: #688B9A;
+  background-color: #688b9a;
   padding: 1.2em 1.5em;
   border: none;
   text-transform: UPPERCASE;
@@ -189,8 +187,7 @@ body {
 }
 
 .like {
-
-  background-color: #688B9A;
+  background-color: #688b9a;
   padding: 1.2em 1.5em;
   text-transform: UPPERCASE;
   font-weight: bold;
@@ -200,8 +197,7 @@ body {
 }
 
 .buy-now:hover {
-
-  background-color: #688B9A;
+  background-color: #688b9a;
   color: #fff;
 }
 
@@ -282,68 +278,76 @@ body {
   visibility: visible;
 }
 
-.line{
+.line {
   width: auto;
   border-bottom: 1px solid black;
   padding-bottom: 2%;
-  }
-  h5{
-    padding-top:2%;
-  }
-  .description{
-    color:#525151;
-  }
-  .space{
-margin-top: 3%;
-  }
+}
+h5 {
+  padding-top: 2%;
+}
+.description {
+  color: #525151;
+}
+.space {
+  margin-top: 3%;
+}
 
-  .heart {
-    background-color: rgb(209, 209, 209);
-    display: inline-block;
-    height: 30px;
-    margin: 0 10px;
-    position: relative;
-    top: 0;
-    transform: rotate(-45deg);
-    width: 30px;
-  }
+.heart {
+  background-color: rgb(209, 209, 209);
+  display: inline-block;
+  height: 30px;
+  margin: 0 10px;
+  position: relative;
+  top: 0;
+  transform: rotate(-45deg);
+  width: 30px;
+}
 
-  .heart:before,
-  .heart:after {
-    content: "";
-    background-color: rgb(209, 209, 209);
-    border-radius: 50%;
-    height: 30px;
-    position: absolute;
-    width: 30px;
-  }
+.heart:before,
+.heart:after {
+  content: "";
+  background-color: rgb(209, 209, 209);
+  border-radius: 50%;
+  height: 30px;
+  position: absolute;
+  width: 30px;
+}
 
-  .heart:before {
-    top: -15px;
-    left: 0;
-  }
+.heart:before {
+  top: -15px;
+  left: 0;
+}
 
-  .heart:after {
-    left: 15px;
-    top: 0;
-  }
+.heart:after {
+  left: 15px;
+  top: 0;
+}
 
-  .heart:hover, .heart:hover:after, .heart:hover:before{
-    cursor: pointer;
-    background-color:red;
-  }
-  .fa-heart:before {
-    content: "\f0aa";
-  }
+.heart:hover,
+.heart:hover:after,
+.heart:hover:before {
+  cursor: pointer;
+  background-color: red;
+}
+.fa-heart:before {
+  content: "\f0aa";
+}
 
-  button.like:hover {
-
-  background-color: #688B9A;
+button.like:hover {
+  background-color: #688b9a;
   color: white;
-
-  }
-
-  button.has-like {
-
-    background-color: #688B9A;
-  }
+}
+button.has-like {
+  background-color: #688b9a;
+}
+.ul-slots {
+  display: inline-block;
+  color: #36a808;
+  width: 25%;
+  margin-bottom: 2%;
+}
+.focus:focus {
+  background-color: rgb(92, 182, 73);
+  color: white;
+}

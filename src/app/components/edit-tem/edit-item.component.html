@@ -6,14 +6,14 @@
           <h5>Item Information:</h5>
           <div [innerHtml]='msgEr' *ngIf="msgEr" style="color: #ff0000;"></div>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Item Name" name="name" ngModel required>
+            <input matInput placeholder="Item Name" name="name" required [(ngModel)]="itemDetails.data.name">
           </mat-form-field> <br>
 
           <mat-form-field class="example-full-width">
             <mat-label>Item Description</mat-label>
             <textarea class="md-textarea md-textarea-auto form-control" matInput cdkTextareaAutosize
               #autosize="cdkTextareaAutosize" cdkTextareaAutosize label="Item Description"
-              placeholder="Insert the description of the item here" cdkAutosizeMinRows="5" name="description" ngModel
+              placeholder="Insert the description of the item here" cdkAutosizeMinRows="5" name="description" [(ngModel)]="itemDetails.data.description"
               required></textarea>
           </mat-form-field><br>
 
@@ -22,7 +22,8 @@
             <mat-icon [matMenuTriggerFor]="appMenu">calendar_today</mat-icon>
             <mat-menu #appMenu="matMenu" class="drop-calendar">
               <div (click)="$event.stopPropagation()">
-                <mat-calendar #calendar [minDate]="minDate" [maxDate]="maxDate" (selectedChange)="select($event,calendar)" [dateClass]="isSelected">
+                <mat-calendar #calendar [minDate]="minDate" [maxDate]="maxDate"
+                  (selectedChange)="select($event,calendar)" [dateClass]="isSelected">
                 </mat-calendar>
               </div>
             </mat-menu>
@@ -33,13 +34,14 @@
             </div>
             <div [innerHtml]='delivery_slots_msg' *ngIf="delivery_slots_msg" style="color: #ff0000;"></div>
           </div>
-         
+
           <mat-form-field class="example-full-width">
-            <input matInput type="number" placeholder="price" name="price" ngModel required [(ngModel)]="price">
+            <input matInput type="number" placeholder="price" name="price" ngModel required [(ngModel)]="itemDetails.data.price">
             <span matSuffix>Peas</span>
             <div [innerHtml]='price_msg' *ngIf="price_msg" style="color: #ff0000;"></div>
           </mat-form-field>
-          <p class="small" color="orange">Notice: if the item is a service, the price is intended as price per hours or per service
+          <p class="small" color="orange">Notice: if the item is a service, the price is intended as price per hours or
+            per service
           </p>
 
 
@@ -49,7 +51,7 @@
           <h5> Contact Information:</h5>
           <mat-form-field>
             <input matInput type="number" placeholder="Phone Number" name="number" ngModel required
-              [(ngModel)]="number">
+            [(ngModel)]="itemDetails.data.number">
             <div [innerHtml]='number_msg' *ngIf="number_msg" style="color: #ff0000;"></div>
           </mat-form-field>
 
@@ -58,18 +60,18 @@
           <p>Address: <mat-icon matSuffix>location_on</mat-icon>
           </p>
           <mat-form-field>
-            <input matInput placeholder="country" name="country" ngModel required [maxLength]="50">
+            <input matInput placeholder="country" name="country" ngModel required [maxLength]="50" [(ngModel)]="itemDetails.data.country">
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="City" name="city" ngModel required>
-          </mat-form-field>
-
-          <mat-form-field>
-            <input matInput placeholder="street" name="street" ngModel required>
+            <input matInput placeholder="City" name="city" ngModel required [(ngModel)]="itemDetails.data.city">
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput type="zip" placeholder="zip" name="zip" ngModel maxlength="5" required [(ngModel)]="zip">
+            <input matInput placeholder="street" name="street" ngModel required [(ngModel)]="itemDetails.data.street">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput type="zip" placeholder="zip" name="zip" ngModel maxlength="5" required [(ngModel)]="itemDetails.data.zip">
             <div [innerHtml]='zip_msg' *ngIf="zip_msg" style="color: #ff0000;"></div>
 
           </mat-form-field>
@@ -79,12 +81,12 @@
         <!-- more  -->
         <div class="col-xl-4  col-sm-12 mt-5 ">
 
-          <mat-checkbox ngForm input type="checkbox" name="is_service" [(ngModel)]="isService">
+          <mat-checkbox ngForm input type="checkbox" name="is_service" (change)="checkCheckBoxIsService($event)" [(ngModel)]="itemDetails.data.is_service">
             This item is a service
           </mat-checkbox>
           <mat-icon class='colorInfo' matTooltip="Select to see your item on Service section">info_outline</mat-icon>
 
-          <mat-checkbox ngForm input type="checkbox" name="showContact" [(ngModel)]="showContact">
+          <mat-checkbox ngForm input type="checkbox" name="showContactInfo" (change)="checkCheckBoxShowInfo($event)" [(ngModel)]="itemDetails.data.showContactInfo">
             Show my contact information
           </mat-checkbox>
           <mat-icon class='colorInfo' matTooltip="Your contact information will appear to all users">info_outline
@@ -97,17 +99,9 @@
               <input type="file" (change)="uploadImage($event)">
             </p>
           </div>
-
-
-          <button class="bottom big" mat-raised-button type="submit">Sell!</button>
-
+          <button class="bottom-edit big" mat-raised-button type="submit">Update Item</button>
         </div>
-
-
-
       </div>
     </form>
-
-
   </div>
 </div>

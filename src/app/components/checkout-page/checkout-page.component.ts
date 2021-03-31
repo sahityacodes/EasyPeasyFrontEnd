@@ -37,7 +37,6 @@ export class CheckoutPageComponent implements OnInit {
 
 
   getCheckoutInfo() {
-    console.log(this.itemID)
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -47,7 +46,7 @@ export class CheckoutPageComponent implements OnInit {
     };
     try {
       return this.http
-        .get<ItemModel>('/api/easypeasy/v1/product/detail', httpOptions)
+        .get<ItemModel>('/product/detail', httpOptions)
         .subscribe(
           (res) => {
             if (res.result === 'success') {
@@ -78,7 +77,7 @@ export class CheckoutPageComponent implements OnInit {
     try {
       return this.http
         .post<any>(
-          '/api/easypeasy/v1/user/checkout',
+          '/user/checkout',
           this.formData,
           httpOptions
         )
@@ -92,7 +91,6 @@ export class CheckoutPageComponent implements OnInit {
                 timer: 6000,
               }).then(() => {
                 this.authService.getWalletBalance(localStorage.getItem('walletAddress'));
-                console.log(res.data.wallet);
                 window.location.reload();
               });
             }

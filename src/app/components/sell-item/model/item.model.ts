@@ -4,7 +4,7 @@ export interface ItemModel {
   description:string;
   price:number;
   category:number;
-  delivery_time:Date;
+  delivery_time: Date [];
   is_service:boolean;
   zip:number;
   country:string;

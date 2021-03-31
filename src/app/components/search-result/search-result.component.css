@@ -3,11 +3,16 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
 .container {
   background-color: white;
   padding-top: 1%;
   padding-bottom: 1%;
+}
+.flexSpaceBetween {
+  font-size: 90%;
+  width: 100%;
+  display: inline-block; 
+  position: relative; 
 }
 mat-card-content {
   max-width: 320px;
@@ -17,8 +22,8 @@ mat-drawer {
   position: fixed;
   background-color: rgb(236, 236, 236);
 }
-mat-slider-thumb-label {
-  background-color: red !important;
+.mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
+  color: #f44336;
 }
 img {
   background-size: cover;
@@ -46,14 +51,6 @@ a:active {
 .p-num {
   display: -webkit-inline-box;
 }
-::ng-deep .custom-slider .ngx-slider .ngx-slider-selection {
-  background: rgb(255, 255, 0);
-}
-.flexSpaceBetween {
-  font-size: 90%;
-  justify-content: space-between;
-  display: flex;
-}
 select {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 90%;
@@ -62,18 +59,14 @@ select {
 .example-section {
   font-size: 90%;
   font-weight: normal;
-  display: flex;
   justify-content: space-between;
+  display: flex;
+  margin-top: 10%;
 }
-.example-margin{
+.example-margin {
   margin-right: 10%;
 }
-.example-full-width {
-  width: 15%;
-  margin-left: 2%;
-  appearance: initial;
-}
-.bottom {
+.bottom-search {
   background-color: #688b9a;
   color: white;
 }

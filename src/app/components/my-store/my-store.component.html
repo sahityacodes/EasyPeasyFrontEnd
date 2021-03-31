@@ -1,27 +1,23 @@
-
-
-<mat-drawer-container class="container" >
-  <mat-drawer-content style=" overflow: hidden;" >
-    <!--      &lt;!&ndash; id="{{data._id}}" &ndash;&gt;-->
-
-<!--    <h1 align="center" class="align-content-centere mt-3 mb-3"> MY STORE</h1>-->
-    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-evenly center" >
-
-      <mat-card-content   class="itemstList" *ngFor="let data of data">
-        <a [routerLink]="['/item-details', data._id]"  class="data">
+<mat-drawer-container class="container">
+  <mat-drawer-content style=" overflow: hidden;">
+    <h2 style="text-align: center;color: rgba(15, 13, 13, 0.589); margin-bottom: 3%;">My Store</h2>
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-evenly center">
+      <mat-card-content class="itemstList" *ngFor="let data of data">
+        <a [routerLink]="['/item-details', data._id]" class="data">
           <img mat-card-image src={{data.image}} alt="image">
-          <div style=" padding-left:20px;display: grid;">  {{data.name}}
+          <div style=" padding-left:20px;display: grid;"> {{data.name}}
             <b style="color:#8ec741"> {{data.price}} Peas</b>
           </div>
         </a>
+        <button [routerLink]="['/edit_item', data._id]" mat-raised-button
+          style="background-color:#688B9A;color: white;width: 100%;">Edit Item</button>
       </mat-card-content>
-
     </div>
     <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-evenly center">
-      <div class="p-num" >
-        <a  href="javascript: void(0);" (click)="previous()" id="pre">	&#171;&nbsp;</a>
+      <div class="p-num">
+        <a href="javascript: void(0);" (click)="previous()" id="pre"> &#171;&nbsp;</a>
         <span id="pageNumber"></span>
-        <a   href="javascript: void(0);" (click)="next()"  id="nex">&nbsp;	&#187;</a>
+        <a href="javascript: void(0);" (click)="next()" id="nex">&nbsp; &#187;</a>
       </div>
     </div>
   </mat-drawer-content>
@@ -29,4 +25,3 @@
 
 
 </mat-drawer-container>
-

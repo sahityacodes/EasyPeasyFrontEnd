@@ -10,6 +10,7 @@ import { SpinnerService } from '../../spinner-cp/spinner.service';
 import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss';
 
+
 const httpOptions = {
   // headers: new HttpHeaders({
   //   'Content-Type': 'multipart/form-data',
@@ -27,14 +28,14 @@ export class AuthService {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
   ) {}
 
   forgetPassword(forgetPasswordmodel: ForgetpasswordModel) {
     let Res;
     this.http
       .put<any>(
-        '/api/easypeasy/v1/foget_password',
+        '/foget_password',
         forgetPasswordmodel,
         httpOptions
       )
@@ -56,7 +57,7 @@ export class AuthService {
     let Res;
     this.http
       .put<any>(
-        '/api/easypeasy/v1/reset_password',
+        '/reset_password',
         resetPasswordmodel,
         httpOptions
       )
@@ -88,12 +89,11 @@ export class AuthService {
   registerUser(userModel: UserModel) {
     this.spinnerService.requestStarted();
     this.user = userModel;
-    console.log(JSON.stringify(this.user));
     let registerRes;
 
     this.http
       .post<any>(
-        '/api/easypeasy/v1/register',
+        '/register',
         { usersdata: JSON.stringify(this.user) },
         httpOptions
       )
@@ -117,22 +117,11 @@ export class AuthService {
       });
   }
 
-  // loginUser(authModel: AuthModel) {
-  //   this.spinnerService.requestStarted();
-  //   if(this.authenticateUser(authModel)){
-  //     this.router.navigate(['/'])
-  //     this.spinnerService.requestEnded();
-  //   }else{
-  //     this.spinnerService.resetSpinner();
-  //     this.router.navigate(['/login'])
-  //   }
-  // }
-
   authenticateUser(authModel: AuthModel) {
     let loginRes;
     this.http
       .post(
-        '/api/easypeasy/v1/login',
+        '/login',
         {
           username: authModel.username,
           password: authModel.password,
@@ -142,8 +131,8 @@ export class AuthService {
       .subscribe({
         next: (data) => {
           loginRes = data
-          console.log(loginRes)
           this.authData.next(loginRes);
+          // localStorage.setItem('user_sid', this.getCookie('user_sid'));
           localStorage.setItem('userName', loginRes.data.userName);
           localStorage.setItem('password', authModel.password);
           localStorage.setItem('email', loginRes.data.email);
@@ -174,23 +163,11 @@ export class AuthService {
         },
         error: (data) => {
           loginRes = data;
+          console.log(loginRes)
           this.authData.next(loginRes);
         },
       });
   }
-
-  // getWallet(walletMoney: number, page: string) {
-  //   localStorage.getItem('wallet')
-  //   this.spinnerService.requestStarted();
-  //   this.walletData.next(walletMoney);
-  //   this.spinnerService.requestEnded();
-  //   localStorage.setItem('wallet', walletMoney.toString());
-  //   console.log(localStorage.getItem('wallet'));
-  //   this.router.navigate([page])
-  // .then(() => {​​
-  //   window.location.reload();
-  // }​​);
-  // }
 
   getWalletBalance(walletAddress: string) {
     let walletRes;
@@ -199,7 +176,7 @@ export class AuthService {
       withCredentials: true,
     };
     this.http
-      .get('/api/easypeasy/v1/wallet/balance', httpOptionwallet)
+      .get('/wallet/balance', httpOptionwallet)
       .subscribe({
         next: (res) => {
           walletRes = res;
@@ -220,7 +197,7 @@ export class AuthService {
   logoutUser() {
     let logoutRes;
     localStorage.clear();
-    this.http.get('/api/easypeasy/v1/logout', httpOptions).subscribe({
+    this.http.get('/logout', httpOptions).subscribe({
       next: () => {
         this.authData.next(null);
         this.router.navigate(['/']).then();
@@ -231,4 +208,9 @@ export class AuthService {
       },
     });
   }
+
+  // getCookie(key: string) {
+  //   console.log(this.cookieService);    
+  //   return this.cookieService.get(key);
+  // }
 }

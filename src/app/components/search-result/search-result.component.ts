@@ -1,18 +1,18 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatSliderChange } from '@angular/material/slider';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { SpinnerService } from '../spinner-cp/spinner.service';
 
 @Component({
-  selector: 'app-items-list',
-  templateUrl: './items-list.component.html',
-  styleUrls: ['./items-list.component.css'],
+  selector: 'app-search-result',
+  templateUrl: './search-result.component.html',
+  styleUrls: ['./search-result.component.css'],
 })
-export class ItemsListComponent implements OnInit {
-  itemTypefilter: any;
+export class SearchResultsComponent implements OnInit {
+  searchFilter: any;
   data: any;
   pageNo: number = 1;
   myValue: string;
@@ -22,12 +22,14 @@ export class ItemsListComponent implements OnInit {
   filter: any;
   priceOrder: any;
   dateOrder: any;
+  productTypeFilter: any = false;
+  servicesTypeFilter: any = false;
+  errorMsg: string;
   minPeas: number = 0;
   maxPeas: number = 0;
 
   disableSelect = new FormControl(false);
   constructor(
-    private spinnerService: SpinnerService,
     private activatedRoute: ActivatedRoute,
     private http: HttpClient,
     private router: Router
@@ -35,7 +37,7 @@ export class ItemsListComponent implements OnInit {
 
   ngOnInit() {
     this.sub = this.activatedRoute.queryParams.subscribe((params) => {
-      this.itemTypefilter = atob(params['filter']); // Defaults to 0 if no query param provided.
+      this.searchFilter = atob(params['search']); // Defaults to 0 if no query param provided.
     });
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.getItemList(this.pageNo);
@@ -49,7 +51,9 @@ export class ItemsListComponent implements OnInit {
   onPriceFilter(min: number, max: number): void {
     this.priceFilter = null;
     if (max != 0) {
-      this.priceFilter =  {'$and': [{price: { $gte: min}}, { price: { $lte: max }}] };
+      this.priceFilter = {
+        $and: [{ price: { $gte: min } }, { price: { $lte: max } }],
+      };
       this.getItemList(this.pageNo);
     }
   }
@@ -73,14 +77,47 @@ export class ItemsListComponent implements OnInit {
     this.getItemList(this.pageNo);
   }
 
+  itemTypeProduct(ptype: MatCheckboxChange) {
+    if (ptype.checked) {
+      this.productTypeFilter = true;
+    } else {
+      this.productTypeFilter = false;
+    }
+    this.getItemList(this.pageNo);
+  }
+
+  itemTypeServices(stype: MatCheckboxChange) {
+    if (stype.checked) {
+      this.servicesTypeFilter = true;
+    } else {
+      this.servicesTypeFilter = false;
+    }
+    this.getItemList(this.pageNo);
+  }
+
   getItemList(pageNum: number) {
-    this.filter = this.itemTypefilter;
-    if (this.priceFilter) {
+    this.filter = this.searchFilter;
+    if (this.productTypeFilter) {
       this.filter = JSON.stringify({
-        $and: [JSON.parse(this.itemTypefilter), this.priceFilter],
+        $and: [JSON.parse(this.searchFilter), { is_service: 'false' }],
+      });
+    }
+    if (this.servicesTypeFilter) {
+      this.filter = JSON.stringify({
+        $and: [JSON.parse(this.searchFilter), { is_service: 'true' }],
+      });
+    }
+    if (this.servicesTypeFilter && this.productTypeFilter) {
+      this.filter = JSON.stringify({
+        $and: [JSON.parse(this.searchFilter)],
       });
     }
 
+    if (this.priceFilter) {
+      this.filter = JSON.stringify({
+        $and: [JSON.parse(this.filter), this.priceFilter],
+      });
+    }
     let httpOptions = {
       params: new HttpParams()
         .set('page_size', '12')
@@ -106,20 +143,18 @@ export class ItemsListComponent implements OnInit {
           .set('sort_order', this.dateOrder),
       };
     }
-    this.spinnerService.requestStarted();
     this.data = [];
-    this.http
-      .get('/product', httpOptions)
-      .subscribe((res) => {
-        if (res === undefined || res == 0) {
-          this.previous();
-        }
-        this.data = res;
-        this.displayNUmber(pageNum);
-        this.spinnerService.requestEnded();
-      },(err: any)=>{
-        this.spinnerService.requestEnded();
-      });
+    if (pageNum != 0) {
+      this.http
+        .get('/product', httpOptions)
+        .subscribe((res) => {
+          if (res === undefined || res == 0) {
+            this.previous();
+          }
+          this.data = res;
+          this.displayNUmber(pageNum);
+        });
+    }
   }
 
   next() {
@@ -128,7 +163,7 @@ export class ItemsListComponent implements OnInit {
   }
 
   previous() {
-    this.pageNo = this.pageNo - 1;
+    if (this.pageNo != 1) this.pageNo = this.pageNo - 1;
     this.getItemList(this.pageNo);
   }
 

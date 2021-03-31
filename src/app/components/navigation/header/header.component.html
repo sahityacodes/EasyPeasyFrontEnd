@@ -6,25 +6,25 @@
   </div>
 
   <div>
-    <ul fxLayout  fxLayoutAlign="flex-start" >
-      <li><a routerLink="/"> <img src="/assets/image/log1.png" alt="Logo" width="80%" height="80%"></a></li>
+    <ul fxLayout fxLayoutAlign="flex-start">
+      <li><a routerLink="/"> <img src="/assets/image/log1.png" alt="Logo" width="70%" height="50%"></a></li>
       <li><a (click)="products()">PRODUCTS</a></li>
       <li><a (click)="services()">SERVICES</a></li>
     </ul>
-
   </div>
 
-  <div id="search" class=" input-group" style="width:50%;" layout="row" layout-fill layout-align="center center">
-    <input type="text" class="form-control" placeholder="Search..">
-    <div class="input-group-append">
-      <button class="btn btn-dark sea" type="button">
-        SEARCH
-      </button>
-    </div>
-  </div>
+
+  <span ngbDropdown id="search" class="d-inline-block" style="width:35%;" layout-fill layout-align="center center">
+    <input type="text" class="form-control" id="search-text" aria-describedby="search-text" [(ngModel)]="searchText"  (ngModelChange)="goToSearch($event)"
+      placeholder="Search" form-group autofocus ngbDropdownToggle>
+    <ul ngbDropdownMenu form-group>
+      <li *ngFor="let c of data | appFilter: searchText">
+        <a [routerLink]="['/item-details', c._id]" class="d-inline-block" style="width:35%; font-weight: normal; color: #688B9A;" layout-fill layout-align="center center">{{c.name}} </a>
+      </li>
+    </ul>
+  </span>
 
   <ul fxFlex fxLayout fxLayoutGap="10px" fxLayoutAlign="flex-end" fxHide.xs>
-
     <li><a *ngIf="!isAuth" routerLink="/signup">
         <button mat-stroked-button class="mat-login-header">Sign up</button>
       </a></li>
@@ -33,9 +33,9 @@
           Login
         </button>
       </a></li>
-    <li> <a *ngIf="isAuth && authInfo !== null" routerLink = "/creditcard">
+    <li> <a *ngIf="isAuth && authInfo !== null" routerLink="/creditcard">
         <button mat-stroked-button class="mat-login-header ">
-          <span *ngIf ="wallet" class="span-wallet">{{wallet}}</span>
+          <span *ngIf="wallet" class="span-wallet">{{wallet}}</span>
           <img src="assets/image/peas.svg" class="responsive" alt="Login">
         </button>
       </a></li>
@@ -51,11 +51,11 @@
               <button id="loginDropDown" mat-stroked-button class="mat-login-header" ngbDropdownToggle>
                 <img src="assets/image/auth-user.svg" class="responsive" alt="Login">
               </button>
-              <div class="justify-content-center" ngbDropdownMenu aria-labelledby="loginDropDown">
+              <div class="justify-content-flex-start" ngbDropdownMenu aria-labelledby="loginDropDown" form-group>
                 <span>HELLO {{userName | uppercase}}</span>
-                <button [routerLink] ="['/account_details']" ngbDropdownItem >Account Details</button>
-                <button [routerLink] ="['/my_store', userName]" ngbDropdownItem >My Store</button>
-                <button [routerLink] ="['/my_order', userName]" ngbDropdownItem >Customer Orders</button>
+                <button [routerLink]="['/account_details']" ngbDropdownItem>Account Details</button>
+                <button [routerLink]="['/my_store', userName]" ngbDropdownItem>My Store</button>
+                <button [routerLink]="['/my_order', userName]" ngbDropdownItem>Customer Orders</button>
                 <button ngbDropdownItem routerLink="/sell_item">Become a Seller</button>
                 <a *ngIf="isAuth && authInfo !== null" routerLink="/">
                   <button ngbDropdownItem (click)="logOut()">Log out</button>

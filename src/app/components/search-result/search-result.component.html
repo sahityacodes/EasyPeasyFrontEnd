@@ -1,0 +1,54 @@
+<mat-drawer-container class="container">
+  <mat-drawer-content style=" overflow: unset;">
+  <div class="flexSpaceBetween">
+    <tbody style="float: left;  margin-right: 20%;">
+      <tr>
+        <select (change)="getOrder($event)">
+          <option value="Order By" selected>Order By</option>
+          <option value="lowtohigh">Price: Low - High</option>
+          <option value="hightolow">Price: High - Low</option>
+          <option value="newfirst">Newest First</option>
+        </select>
+      </tr>
+      <tr>
+        <span class="example-section">
+          <mat-checkbox class="example-margin" value="Products" (change)="itemTypeProduct($event)">Products
+          </mat-checkbox>
+          <mat-checkbox class="example-margin" value="Services" (change)="itemTypeServices($event)">Services
+          </mat-checkbox>
+        </span>
+      </tr>
+    </tbody>
+    <div style="float: right;width :30%">
+      <mat-form-field style="width: 22%;margin-right: 2%;">
+        <input matInput type="number" required [(ngModel)]="minPeas" placeholder="Min Peas" name="minPeas">
+      </mat-form-field>
+      <mat-form-field style="width: 22%;margin-right:  2%;">
+        <input matInput type="number" required [(ngModel)]="maxPeas" placeholder="Max Peas" name="maxPeas">
+      </mat-form-field>
+      <button class="bottom-search" mat-flat-button type="submit" style="margin-right: 2%;"
+        (click)="onPriceFilter(minPeas,maxPeas)">Apply</button>
+      <button class="bottom-search" mat-flat-button (click)="resetFilters()">Reset</button>
+    </div>
+  </div>
+  </mat-drawer-content>
+  <mat-drawer-content style=" overflow: hidden;">
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-evenly center">
+      <mat-card-content class="itemstList" *ngFor="let data of data">
+        <a [routerLink]="['/item-details', data._id]" class="data">
+          <img mat-card-image src={{data.image}} alt="image">
+          <div style=" padding-left:20px;display: grid;"> {{data.name}}
+            <b style="color:#8ec741"> {{data.price}} Peas</b>
+          </div>
+        </a>
+      </mat-card-content>
+    </div>
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-evenly center">
+      <div class="p-num">
+        <a href="javascript: void(0);" (click)="previous()" id="pre"> &#171;&nbsp;</a>
+        <span id="pageNumber"></span>
+        <a href="javascript: void(0);" (click)="next()" id="nex">&nbsp; &#187;</a>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

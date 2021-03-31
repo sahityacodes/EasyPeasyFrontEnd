@@ -122,7 +122,6 @@ export class PaymentCardComponents implements OnInit {
 
   onSubmit(form: NgForm) {
     this.addPeas(form);
-    console.log(form.value);
   }
 
   addPeas(form: NgForm) {
@@ -171,7 +170,6 @@ export class PaymentCardComponents implements OnInit {
 
   onSubmitMoney(f: NgForm) {
     this.convertPeas(f);
-    console.log(f.value);
   }
 
   convertPeas(f: NgForm) {
@@ -243,7 +241,7 @@ export class PaymentCardComponents implements OnInit {
     if (this.peasData !== undefined) {
       this.http
         .post(
-          '/api/easypeasy/v1/wallet/transfer',
+          '/wallet/transfer',
           {
             address: localStorage.getItem('walletAddress'),
             amount: this.peasData.peas * 100,
@@ -270,7 +268,7 @@ export class PaymentCardComponents implements OnInit {
     } else {
       this.http
         .post(
-          '/api/easypeasy/v1/wallet/transfer',
+          '/wallet/transfer',
           {
             address: localStorage.getItem('walletAddress'),
             amount: this.convertData.money * 100,

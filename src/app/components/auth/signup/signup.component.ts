@@ -34,7 +34,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   authSubscription: Subscription;
   hidePass = true;
   hidePass1 = true;
-  msgEmail:string;
+msgEmail:string;
   msgPass:string;
   msgUserName:string;
   msgMobile:string;
@@ -57,7 +57,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.msgName=""
     this.msgFis=""
   }
-  validation(res){
+  validation(   res ){
 
  if(res.result == 'fail'){
 
@@ -113,7 +113,6 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.authSubscription = this.authService.authData.subscribe(data => {
       this._response = data;
       this.validation( this._response )
-      console.log(this._response)
     })
   }
 

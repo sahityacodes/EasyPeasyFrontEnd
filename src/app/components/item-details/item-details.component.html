@@ -12,27 +12,31 @@
 				</div>
 				<div class="details col-md-6">
 					<div>
-						   <h4 class="item-title float-left"  >{{item.name}}</h4>
-						   <a class="float-right"><span class="heart"></span></a>
+						<h4 class="item-title float-left">{{item.name}}</h4>
+						<a class="float-right"><span class="heart"></span></a>
 
-						</div>
-						<p class="price">{{item.price}} peas</p>
-						<p class="description">{{item.description}}</p>
-                       <div class="line" ></div>
+					</div>
+					<p class="price">{{item.price}} peas</p>
+					<p class="description">{{item.description}}</p>
+					<div class="line"></div>
 					<!-- End line -->
 					<h5>Location Details</h5>
-					<span class="description">Location : {{item.street}}, {{item.zip}}, {{item.city}}, {{item.country}}</span>
-					<span *ngIf ="item.real_delivery_time" class="description">Availability : Till {{item.real_delivery_time | date }}</span>
-
+					<span class="description">{{item.street}}, {{item.zip}}, {{item.city}}, {{item.country}}</span>
+					<!-- <span class="description">Availability : Till {{item.delivery_time | date }}</span> -->
+					<br />
+					<span class="description">
+						<h5>Select Your Delivery Slot</h5>
+						<li class="ul-slots" *ngFor="let date of item.delivery_time">
+							<button class="mat-raised-button focus">{{date}}</button>
+						</li>
+					</span>
 					<h5>Contact Me</h5>
 					<span class="description">Email : {{item.seller.email}}</span>
 					<span class="description">Contact No : {{item.seller.mobile}}</span>
-
 					<br />
-
-
 					<div class="action">
-						<button   [routerLink]="['/checkout', item._id]" mat-flat-button  class="buy-now btn btn-default" type="button">Buy Now</button>
+						<button [routerLink]="['/checkout', item._id]" mat-flat-button class="buy-now btn btn-default"
+							type="button">Buy Now</button>
 					</div>
 				</div>
 			</div>

@@ -1,10 +1,10 @@
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from 'rxjs/internal/Subscription';
-import {AuthService} from '../auth/service/auth.service';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { AuthService } from '../auth/service/auth.service';
 import Swal from 'sweetalert2';
-import 'sweetalert2/src/sweetalert2.scss'
+import 'sweetalert2/src/sweetalert2.scss';
 
 @Component({
   selector: 'app-my-store',
@@ -18,14 +18,18 @@ export class MyStoreComponent implements OnInit {
   myValue: string;
   myValueSub: Subscription;
   sub: Subscription;
-  sellerId:any;
+  sellerId: any;
 
-  constructor(private activatedRoute: ActivatedRoute, private http: HttpClient, private router: Router, private authService: AuthService) {
-  }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private http: HttpClient,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     if (!localStorage.getItem('userName')) {
-      this.router.navigate(['/login'])
+      this.router.navigate(['/login']);
     }
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.pageNo = 1;
@@ -33,20 +37,23 @@ export class MyStoreComponent implements OnInit {
     this.removeBack();
   }
 
-
   getItemList(pageNum: number) {
-
     this.data = [];
-this.sellerId=localStorage.getItem('userid')
+    this.sellerId = localStorage.getItem('userid');
     let httpOptions = {
-      withCredentials: true
+      withCredentials: true,
     };
-    this.http.post('/api/easypeasy/v1/product/seller/products',{page_size:12,page_number:pageNum,sellerId:this.sellerId}, httpOptions)
-      .subscribe((res) => { {
-        if (res === undefined || res == 0) {
-          this.previous();
-        }
-
+    this.http
+      .post(
+        '/product/seller/products',
+        { page_size: 12, page_number: pageNum, sellerId: this.sellerId },
+        httpOptions
+      )
+      .subscribe((res) => {
+        {
+          if (res === undefined || res == 0) {
+            this.previous();
+          }
         }
         this.data = res;
         this.displayNUmber(pageNum);
@@ -54,13 +61,12 @@ this.sellerId=localStorage.getItem('userid')
   }
 
   next() {
-
-    this.pageNo = this.pageNo + 1
+    this.pageNo = this.pageNo + 1;
     this.getItemList(this.pageNo);
   }
 
   previous() {
-    this.pageNo = this.pageNo - 1
+    this.pageNo = this.pageNo - 1;
     this.getItemList(this.pageNo);
   }
 
@@ -71,9 +77,9 @@ this.sellerId=localStorage.getItem('userid')
 
   removeBack() {
     if (this.pageNo == 1) {
-      document.getElementById('pre').setAttribute("style", "display:none");
+      document.getElementById('pre').setAttribute('style', 'display:none');
     } else {
-      document.getElementById('pre').setAttribute("style", "display:contents");
+      document.getElementById('pre').setAttribute('style', 'display:contents');
     }
   }
 }

@@ -1,22 +1,21 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ItemModel } from './model/item.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ItemDetailsModel, ItemSellModel } from './model/item.details.model';
 import { Subject } from 'rxjs';
 import {
   HttpClient,
   HttpErrorResponse,
   HttpParams,
 } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-sell-item',
-  templateUrl: './sell-item.component.html',
-  styleUrls: ['./sell-item.component.css'],
+  selector: 'app-edit-item',
+  templateUrl: './edit-item.component.html',
+  styleUrls: ['./edit-item.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class SellItemComponent implements OnInit {
+export class EditItemComponent implements OnInit {
   url;
   formData = new FormData();
   authData = new Subject<any>();
@@ -37,13 +36,16 @@ export class SellItemComponent implements OnInit {
   zip;
   minDate: Date;
   maxDate: Date;
-  private ItemData: ItemModel;
+  itemDetails: ItemDetailsModel;
+  itemSellModel : ItemSellModel;
   delivery_slots_msg: string;
+  fileEvent;
+  itemId: any;
 
   constructor(
     private http: HttpClient,
     private router: Router,
-    private datePipe: DatePipe,
+    private aRoute: ActivatedRoute
   ) {}
 
   validation() {
@@ -81,6 +83,31 @@ export class SellItemComponent implements OnInit {
     }
     this.minDate = new Date();
     this.maxDate = new Date(Date.now() + 12096e5);
+    this.itemId = this.aRoute.snapshot.params.itemId;
+    if (this.itemId) {
+      let httpOptions = {
+        params: new HttpParams().set('productId',  this.itemId),
+      };
+      try {
+        this.http
+          .get<ItemDetailsModel>('/product/detail', httpOptions)
+          .subscribe(
+            (res) => {
+              this.itemDetails = res;
+              console.log(this.itemDetails)
+            },
+            (err: HttpErrorResponse) => {
+              if(err.status == 403){
+                if (!localStorage.getItem('userName')) {
+                  this.router.navigate(['/login']);
+                }
+              }
+            }
+          );
+      } catch (error: any) {
+        console.log('Error in Item Details Component : ', error);
+      }
+    }
   }
 
   onSubmit(form: NgForm) {
@@ -90,31 +117,32 @@ export class SellItemComponent implements OnInit {
   selProduct(form: NgForm) {
     const httpOptions = {
       withCredentials: true,
-  };
+    };
 
     if (this.validation()) {
-      this.ItemData = {
+      this.itemSellModel = {
         username: localStorage.getItem('userName'), //todo have to change it to loged user
         name: form.value.name,
         description: form.value.description,
         price: form.value.price,
         delivery_time: this.daysSelected,
         category: form.value.category,
-        is_service: this.isService,
+        is_service: this.itemDetails.data.is_service,
         quantity: 1,
         country: form.value.country,
         city: form.value.city,
         street: form.value.street,
         zip: form.value.zip,
         number: form.value.number,
-        showContactInfo: this.showContact,
+        showContactInfo: this.itemDetails.data.showContactInfo,
+        _id :  this.itemId,
+        publication_date : Date.now()
       };
-      console.log(this.ItemData)
       this.formData.append('image', this.image, this.image.name);
-      this.formData.append('productdata', JSON.stringify(this.ItemData));
+      this.formData.append('productdata', JSON.stringify(this.itemSellModel));
       this.http
         .post<any>(
-          '/product/add',
+          '/product/update',
           this.formData,
           httpOptions
         )
@@ -130,6 +158,16 @@ export class SellItemComponent implements OnInit {
     }
   }
 
+  checkCheckBoxShowInfo(event){
+    this.itemDetails.data.showContactInfo = event.checked
+    console.log(this.itemDetails.data.showContactInfo)
+  }
+
+  checkCheckBoxIsService(event){
+    this.itemDetails.data.is_service = event.checked
+    console.log(this.itemDetails.data.is_service)
+  }
+
   uploadImage(event) {
     var mimeType = event.target.files[0].type;
     if (mimeType !== 'image/jpeg') {
@@ -142,7 +180,6 @@ export class SellItemComponent implements OnInit {
 
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
-
     reader.onload = (_event) => {
       this.image_msg = '';
       this.url = reader.result;
@@ -164,7 +201,6 @@ export class SellItemComponent implements OnInit {
   };
 
   select(event: any, calendar: any) {
-    console.log(calendar);
     this.delivery_slots_msg = null;
     const date =
       event.getFullYear() +

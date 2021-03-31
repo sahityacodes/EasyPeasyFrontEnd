@@ -1,6 +1,6 @@
 export interface ItemModel {
   showContactInfo: boolean;
-  real_delivery_time: any;
+  delivery_time: Date[];
   seller: any;
   result: any;
   data: ItemModel;

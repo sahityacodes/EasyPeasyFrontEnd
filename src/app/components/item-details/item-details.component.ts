@@ -20,7 +20,6 @@ export class ItemDetailsComponent implements OnInit {
   deliveryDate: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {
-    console.log(route.snapshot)
     this.itemID = this.route.snapshot.params.itemId;
   }
 
@@ -34,7 +33,7 @@ export class ItemDetailsComponent implements OnInit {
     };
     try {
       return this.http
-        .get<ItemModel>('/api/easypeasy/v1/product/detail', httpOptions)
+        .get<ItemModel>('/product/detail', httpOptions)
         .subscribe(
           (res) => {
             if (res.result === 'success') {

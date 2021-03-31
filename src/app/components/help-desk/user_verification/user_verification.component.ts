@@ -45,7 +45,7 @@ export class UserVerificationComponent implements OnInit {
     let httpOptions = {
       withCredentials: true
     };
-    this.http.put<any>('/api/easypeasy/v1/user/verify', this.user_verifymodel,httpOptions).subscribe({
+    this.http.put<any>('/user/verify', this.user_verifymodel,httpOptions).subscribe({
       next: data => {
         this.msgEr = '';
         this.userInfo = true;
