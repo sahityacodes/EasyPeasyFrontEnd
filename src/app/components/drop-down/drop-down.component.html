@@ -1,0 +1,11 @@
+<div class="container">
+  <mat-form-field appearance="fill">
+    <mat-label>Names</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let uni of nameList" >
+        {{uni.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+

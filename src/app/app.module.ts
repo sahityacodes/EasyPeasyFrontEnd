@@ -43,6 +43,8 @@ import { PayMethodComponent } from './components/pay-method/pay-method.component
 import { MatTabsModule } from '@angular/material/tabs';
 import { SearchResultsComponent } from './components/search-result/search-result.component';
 import { FilterPipe } from './components/navigation/header/filter.pipe';
+import {DropdownComponent} from './components/drop-down/drop-down.component';
+
 
 @NgModule({
   declarations: [
@@ -74,6 +76,7 @@ import { FilterPipe } from './components/navigation/header/filter.pipe';
     PayMethodComponent,
     AccountDetailsComponent,
     SearchResultsComponent,
+    DropdownComponent,
     FilterPipe,
   ],
   imports: [

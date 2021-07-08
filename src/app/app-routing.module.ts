@@ -18,7 +18,9 @@ import { PayMethodComponent } from './components/pay-method/pay-method.component
 import { EditItemComponent } from "./components/edit-tem/edit-item.component";
 import {NgModule} from "@angular/core";
 import { AccountDetailsComponent } from "./components/account-details/account-details.component";
+
 import { SearchResultsComponent } from "./components/search-result/search-result.component";
+import { DropdownComponent } from "./components/drop-down/drop-down.component";
 
 
 
@@ -42,6 +44,7 @@ const routes: Routes = [
   {path: 'creditcard', component: PaymentCardComponents},
   {path: 'account_details', component: AccountDetailsComponent},
   {path: 'searchResult',pathMatch: 'full', component: SearchResultsComponent},
+  {path: 'drop_down_demo', component: DropdownComponent},
   {path: '**', component: PageNotFoundComponent},
 ]
 
